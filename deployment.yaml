@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        imagePullPolicy: IfNotPresent
+        image: my-repo/journal-server:v1-abcde
+        resources: 
+          request:
+            cpu: "1.0" 
+            memory: "1G"
+          limits:
+            cpu: "1.0"
+            memory: "1G"
+        ports:
+        - containerPort: 80
+
